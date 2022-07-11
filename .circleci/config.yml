@@ -43,3 +43,7 @@ workflows:
   default:
     jobs:
       - build-test
+      - docker/publish:
+          image: $DOCKERHUB_USERNAME/helloworld
+          tag: 'latest'
+          requires: [build-test]
