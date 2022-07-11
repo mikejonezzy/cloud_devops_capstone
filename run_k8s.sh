@@ -5,7 +5,7 @@ dockerpath=jonezzy/helloworld-app
 
 # Run the Docker Hub container with kubernetes
 kubectl create deployment helloworld-app --image=$dockerpath
-kubectl expose deployment/helloworld-app --port=80
+kubectl expose deployment/helloworld-app --type="LoadBalancer" --port=80
 
 
 # List kubernetes pods
