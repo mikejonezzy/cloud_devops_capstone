@@ -6,7 +6,7 @@ jobs:
   build-test:
     docker:
     # Use the same Docker base as the project
-    - image: python:3.7.3-stretch
+    - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       # Download and cache dependencies
