@@ -38,7 +38,7 @@ jobs:
 
   build-publish:
     docker:
-      - image: circleci/buildpack-deps:stretch
+      - image: cimg/deploy:2022.6.1
     steps:
       - checkout
       - setup_remote_docker
@@ -51,8 +51,7 @@ jobs:
           name: publish docker image to docker hub
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker image push jonezzy/helloworld-app:latest
-            docker image push jonezzy/helloworld-app:$COMMIT_HASH
+            docker image push --all-tags jonezzy/helloworld-app
 
 workflows:
   default:
