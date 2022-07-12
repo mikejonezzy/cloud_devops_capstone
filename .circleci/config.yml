@@ -45,5 +45,5 @@ workflows:
       - build-test
       - docker/publish:
           image: $DOCKERHUB_USERNAME/helloworld-app
-          tag: 'latest'
+          tag: ['latest']
           requires: [build-test]
