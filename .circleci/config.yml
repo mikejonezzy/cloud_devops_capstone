@@ -38,7 +38,7 @@ jobs:
 
   build-publish:
     docker:
-      - image: cimg/deploy:2022.6.1
+      - image: cimg/deploy:2022.06.1-node
     steps:
       - checkout
       - setup_remote_docker
