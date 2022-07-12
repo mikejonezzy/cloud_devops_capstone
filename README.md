@@ -39,5 +39,6 @@ make install
 1. Standalone:  `python app.py`
 2. Run in Docker:  `./run_docker.sh`
 3. Push image to Docker Hub: `./upload_docker.sh`
-4. Run in Kubernetes:  `./run_k8s.sh`. 
-5. After app.py update rolling deployment in Kubernetes:  `./deploy_k8s.sh`.
+4. Create initial AWS EKS cluster using eksctl and config file:  `eksctl create cluster -f cluster.yaml`.
+5. Create initial AWS EKS deployment `./run_k8s.sh`. 
+6. Rolling deployment to AWS EKS after update to app.py:  `./deploy_k8s.sh`.
