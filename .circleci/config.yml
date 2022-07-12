@@ -39,10 +39,23 @@ jobs:
             . venv/bin/activate
             make lint 
 
+  publish-latest:
+    environment:
+      IMAGE_NAME: helloworld-app
+    docker:
+      - image: circleci/buildpack-deps:stretch
+    steps:
+      - setup_remote_docker
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:latest
+
 workflows:
   default:
     jobs:
       - build-test
-      - docker/publish:
-          image: $DOCKERHUB_USERNAME/helloworld-app
-          requires: [build-test]
+      - publish-latest:
+          requires:
+            - build-test
