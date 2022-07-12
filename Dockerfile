@@ -1,4 +1,4 @@
-xFROM python:3.7.3-stretch
+FROM python:3.7.3-stretch
 
 # Create a working directory
 WORKDIR /app
