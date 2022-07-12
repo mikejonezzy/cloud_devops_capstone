@@ -51,7 +51,8 @@ jobs:
           name: publish docker image to docker hub
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker image push --all-tags jonezzy/helloworld-app
+            docker image push jonezzy/helloworld-app:latest
+            docker image push jonezzy/helloworld-app:$COMMIT_HASH
 
 workflows:
   default:
