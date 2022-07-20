@@ -103,3 +103,10 @@ workflows:
       - build-publish:
           requires:
             - test
+      - deploy-application:
+          cluster-name: helloworld-eks
+          aws-region: $AWS_DEFAULT_REGION
+          docker-image-name: "jonezzy/helloworld-app:latest"
+          version-info: "latest"
+          requires:
+            - build-publish
