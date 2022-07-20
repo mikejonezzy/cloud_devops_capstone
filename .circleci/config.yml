@@ -64,6 +64,14 @@ jobs:
         type: string
     steps:
       - checkout
+      - aws-eks/setup
+      - run:
+          name: Check if cluster << parameters.cluster-name >> exists
+          command: |
+            if [[ $(eksctl get cluster << parameters.cluster-name >>) ]]
+            then
+              circleci step halt
+            fi
       - aws-eks/create-cluster:
           cluster-name: << parameters.cluster-name >>
           skip-kubectl-install: false
