@@ -123,6 +123,7 @@ workflows:
           requires:
             - test-build
       - create-cluster:
+          cluster-name: helloworld-eks
           requires:
             - build-publish
       - deploy-application:
