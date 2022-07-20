@@ -124,6 +124,7 @@ jobs:
           resource-file-path: "deployment/helloworld-app-service.yaml"
       - run:
           name: Display useful info about the application
+          command: |
             echo
             echo "Listing cluster info"
             eksctl get cluster
