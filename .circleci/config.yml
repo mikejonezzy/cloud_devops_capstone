@@ -54,6 +54,25 @@ jobs:
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker image push --all-tags jonezzy/helloworld-app
 
+  create-cluster:
+    docker:
+      - image: 'cimg/python:3.10'
+    parameters:
+      cluster-name:
+        description: |
+          Name of the EKS cluster
+        type: string
+    steps:
+      - checkout
+      - aws-eks/create-cluster:
+          cluster-name: << parameters.cluster-name >>
+          skip-kubectl-install: false
+          verbose: 3
+          node-type: t2.small
+          nodes-max: 2
+          ssh-access: false
+          ssh-public-key: ''
+
   deploy-application:
     docker:
       - image: 'cimg/python:3.10'
@@ -103,10 +122,13 @@ workflows:
       - build-publish:
           requires:
             - test-build
+      - create-cluster:
+          requires:
+            - build-publish
       - deploy-application:
           cluster-name: helloworld-eks
           aws-region: $AWS_DEFAULT_REGION
           docker-image-name: "jonezzy/helloworld-app:latest"
           version-info: "latest"
           requires:
-            - build-publish
+            - create-cluster
