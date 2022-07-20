@@ -122,8 +122,9 @@ jobs:
           resource-name: deployment/helloworldapp
       - kubernetes/create-or-update-resource:
           resource-file-path: "deployment/helloworld-app-service.yaml"
+      - aws-eks/setup
       - run:
-          name: Display useful info about the application
+          name: Display useful info about the cluster
           command: |
             echo
             echo "Listing cluster info"
